@@ -6,5 +6,16 @@ fs.readFile('baby-names.csv', function (err, data) {
         throw err
     }
     var parsedData = data.toString('utf-8')
-    console.log(parsedData)
+    var result = parsedData.split('\n').slice(1).map(function(intel) {
+       var pieceOfData = intel.split(',')
+       return {
+           birthYear: parseInt(pieceOfData[0]),
+           gender: pieceOfData[1],
+           ethnicity: pieceOfData[2],
+           name: pieceOfData[3],
+           count: parseInt(pieceOfData[4]),
+           rank: parseInt(pieceOfData[5]),
+       } 
+    })
+    console.log(result[0])
 })
