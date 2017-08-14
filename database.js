@@ -1,7 +1,18 @@
 var sequelize = require('sequelize')
 var sq = new sequelize('postgres://Mel@localhost:5432/inclusion')
 
-module.exports = sq.define('babyName', {
+var userTemplate = sq.define('User', {
+    email: {
+        type: sequelize.STRING
+    },
+    password: {
+        type: sequelize.STRING
+    },
+    name: {
+        type: sequelize.STRING
+    }
+})
+var babyNameTemplate = sq.define('babyName', {
     birthYear: {
         type: sequelize.INTEGER
     },
@@ -21,3 +32,8 @@ module.exports = sq.define('babyName', {
         type: sequelize.INTEGER
     }
 })
+
+module.exports = {
+    User: userTemplate,
+    babyName: babyNameTemplate
+}

@@ -1,7 +1,8 @@
 // retrieving 
 const express = require('express');
+const database = require('./database');
+const jwt = require('express-jwt');
 const app = express();
-const babyNameTemplates = require('./database');
 
 app.use(function (req, res, next) {
     console.log(req.headers)
@@ -12,13 +13,13 @@ app.get('/', function (request, response) {
   response.send('Hello World!')
 })
 
-app.get('/baby-names', function(request, response) {
-    babyNameTemplates.findAll().then(function(data) {
+app.get('/baby-names', jwt({secret: 'I Love Lucy'}),function(request, response) {
+    database.babyName.findAll().then(function(data) {
         response.json(data)
     })
 })
 app.get('/baby-names/top-ten', function(request, response) {
-    babyNameTemplates.findAll({
+    database.babyName.findAll({
         order: [['count', 'DESC']],
         limit: 10
     }).then(function(data){

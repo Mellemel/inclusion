@@ -1,6 +1,5 @@
 var fs = require('fs');
-var babyNameTemplate = require('./database');
-
+var database = require('./database');
 fs.readFile('baby-names.csv', function (err, data) {
     if (err) {
         console.log(err)
@@ -18,8 +17,8 @@ fs.readFile('baby-names.csv', function (err, data) {
             rank: parseInt(pieceOfData[5]),
         }
     })
-    babyNameTemplate.sync({ force: true }).then(() => {
-        babyNameTemplate.bulkCreate(result)
+    database.babyName.sync({ force: true }).then(() => {
+        database.babyName.bulkCreate(result)
     }).catch((err)=>{
         console.log(err)
     })
