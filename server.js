@@ -1,16 +1,53 @@
 // retrieving 
 const express = require('express');
 const database = require('./database');
-const jwt = require('express-jwt');
+const bodyparser = require('body-parser');
+const jwtMiddleware = require('express-jwt');
+const jwt = require('jsonwebtoken')
 const app = express();
 
-app.use(function (req, res, next) {
-    console.log(req.headers)
-    next()
-})
+
+app.use(bodyparser())
 
 app.get('/', function (request, response) {
   response.send('Hello World!')
+})
+
+app.post('/login', function(request, response){
+    database.User.findAll({
+        where: {
+            email: request.body.email
+        }
+    }).then(function(data){
+        const user = data[0].dataValues
+        if (user.password === request.body.password) {
+            response.send("its the same")
+            
+        }
+        const token = jwt.sign({
+            name: user.name,
+            admin: user.admin
+        }, 'ilovelucy', {
+            expiresIn: 60
+        })
+        console.log(token)
+        response.setHeader('Authorization', token.toString())
+        response.json(response.header)
+    })
+})
+
+app.post('/user', function(request, response){
+    console.log(request.method)
+    console.log(request.headers)
+    console.log(request.body)
+    database.User.create({
+        email: request.body.email,
+        name: request.body.name,
+        password: request.body.password,
+        admin: false
+    }).then(function(){
+        response.sendStatus(201)
+    })
 })
 
 app.get('/baby-names', jwt({secret: 'I Love Lucy'}),function(request, response) {
