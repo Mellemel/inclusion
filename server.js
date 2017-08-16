@@ -3,20 +3,14 @@ const express = require('express');
 const database = require('./database');
 const bodyparser = require('body-parser');
 const jwtMiddleware = require('express-jwt');
-const jwt = require('jsonwebtoken')
+const jwt = require('jsonwebtoken');
 const app = express();
-const jwtSecret = 'ilovelucy'
+const jwtSecret = 'ilovelucy';
 
 app.use(bodyparser());
 app.use(express.static('public'));
 
-// Registering '/' route to the express app. e.g. www.google.com/
-app.get('/', function (request, response) {
-    // sending plain text back to the client
-    response.send('Hello World!')
-})
-
-// registering '/' route to the express app. e.g. www.google.com/login
+// registering '/login' route to the express app. e.g. www.google.com/login
 app.post('/login', function(request, response){
     database.User.findAll({
         where: {
@@ -40,6 +34,7 @@ app.post('/login', function(request, response){
     })
 })
 
+// registering '/user' route. e.g. www.google.com/user
 app.post('/user', function(request, response){
     console.log(request.method)
     console.log(request.headers)
@@ -54,11 +49,14 @@ app.post('/user', function(request, response){
     })
 })
 
+// registering '/user' route. e.g. www.google.com/user
 app.get('/baby-names', function(request, response) {
     database.babyName.findAll().then(function(data) {
         response.json(data)
     })
 })
+
+// registering '/baby-names/top-ten'. e.g. www.google.com/user
 app.get('/baby-names/top-ten', function(request, response) {
     database.babyName.findAll({
         order: [['count', 'DESC']],
