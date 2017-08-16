@@ -21,7 +21,7 @@
                     // Add some text to the new cells:
                     cell1.innerHTML = '' + x
                     cell2.innerHTML = '' + element.birthYear
-                    cell3.innerHTML = '' + element.enthnicity
+                    cell3.innerHTML = '' + element.ethnicity
                     cell4.innerHTML = '' + element.name
                     cell5.innerHTML = '' + element.count
                     cell6.innerHTML = '' + element.rank
