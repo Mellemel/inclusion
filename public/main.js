@@ -20,11 +20,11 @@
                     var cell6 = row.insertCell(5)
                     // Add some text to the new cells:
                     cell1.innerHTML = '' + x
-                    cell2.innerHTML = '' + data.birthYear
-                    cell3.innerHTML = '' + data.enthnicity
-                    cell4.innerHTML = '' + data.name
-                    cell5.innerHTML = '' + data.count
-                    cell6.innerHTML = '' + data.rank
+                    cell2.innerHTML = '' + element.birthYear
+                    cell3.innerHTML = '' + element.enthnicity
+                    cell4.innerHTML = '' + element.name
+                    cell5.innerHTML = '' + element.count
+                    cell6.innerHTML = '' + element.rank
                 }
             } else if (xmlhttp.status === 400) {
                 alert('There was an http error 400!')
