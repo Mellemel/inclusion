@@ -8,7 +8,7 @@ const app = express();
 const jwtSecret = 'ilovelucy'
 
 app.use(bodyparser());
-app.use(express.static('public'))
+app.use(express.static('public'));
 
 // Registering '/' route to the express app. e.g. www.google.com/
 app.get('/', function (request, response) {
@@ -40,8 +40,6 @@ app.post('/login', function(request, response){
     })
 })
 
-//curl http://localhost:3000/baby-names --header "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoibWVsIiwiYWRtaW4iOmZhbHNlLCJpYXQiOjE1MDI3NTgwMDgsImV4cCI6MTUwMjc1ODEyOH0.l2liPNomAVLdNK7iTRlmfTXmQHIp8yQFAa4oCgEeL_Y"
-
 app.post('/user', function(request, response){
     console.log(request.method)
     console.log(request.headers)
@@ -56,12 +54,12 @@ app.post('/user', function(request, response){
     })
 })
 
-app.get('/baby-names', jwtMiddleware({secret: secret}), function(request, response) {
+app.get('/baby-names', function(request, response) {
     database.babyName.findAll().then(function(data) {
         response.json(data)
     })
 })
-app.get('/baby-names/top-ten', jwtMiddleware({secret: secret}), function(request, response) {
+app.get('/baby-names/top-ten', function(request, response) {
     database.babyName.findAll({
         order: [['count', 'DESC']],
         limit: 10
