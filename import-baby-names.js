@@ -1,5 +1,6 @@
 var fs = require('fs');
 var database = require('./database');
+
 fs.readFile('baby-names.csv', function (err, data) {
     if (err) {
         console.log(err)
