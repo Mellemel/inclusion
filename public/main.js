@@ -44,6 +44,7 @@ function createTable(data,myTable){
         cell5.innerHTML = '' + element.count
         cell6.innerHTML = '' + element.rank
     }
+    
 }
 
 

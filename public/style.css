@@ -1,0 +1,32 @@
+
+table, th, td{
+    border: 2px solid purple;
+  }
+th,h2{
+    font-family:Lobster;
+    color: white;
+    background-color: purple;
+    text-align: center;
+  }
+form{
+    background-color:purple;
+    color:white;
+    text-shadow: 2px 2px gray;
+    margin: 20%;
+    padding: 2% 10% 2% 10%;
+    box-shadow: 10px 10px 5px #888888;
+  }
+
+body{
+    background-color: #f2ccff
+}
+
+table{
+    margin-top: 2%;
+    box-shadow: 10px 10px 5px #888888;
+}
+
+/*   
+  #cc33ff */
+
+  tr:nth-child(even) {background-color: #f9e6ff}
