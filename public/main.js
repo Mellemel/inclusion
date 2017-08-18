@@ -1,12 +1,16 @@
 (function () {
     // Find a <table> element with id="myTable":
     var myTable = document.getElementById("mytable")
+    // document element lets you access the DOM
 
     var xmlhttp = new XMLHttpRequest();
+    // data request in xml format and create new object 
     xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == XMLHttpRequest.DONE){
             if (xmlhttp.status === 200){
+// check status - 200 is equivalent to status ok
                 var data = JSON.parse(xmlhttp.responseText)
+                console.log(data);
                 for (var x = 0; x < data.length; x++) {
                     var element = data[x];
                     // Create an empty <tr> element and add it to the 1st position of the table:
