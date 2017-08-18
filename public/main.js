@@ -1,7 +1,10 @@
+
+
+
 (function () {
     // Find a <table> element with id="myTable":
     var myTable = document.getElementById("mytable")
-
+    // create a new request xml is communicating between browser and server
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == XMLHttpRequest.DONE){
@@ -33,7 +36,7 @@
             }
         }
     }
-
+// for every new xml hhtp request you have to type this 
     xmlhttp.open('GET', '/baby-names/top-ten', true);
     xmlhttp.send()
 
