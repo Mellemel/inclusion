@@ -10,6 +10,10 @@ const jwtSecret = 'ilovelucy';
 app.use(bodyparser());
 app.use(express.static('public'));
 
+app.get("/log", (req, res) => {
+ res.sendFile(__dirname + "/public/login.html");
+});
+
 // registering '/login' route to the express app. e.g. www.google.com/login
 app.post('/login', function(request, response){
     database.User.findAll({
@@ -49,6 +53,8 @@ app.post('/user', function(request, response){
     })
 })
 
+
+
 // registering '/user' route. e.g. www.google.com/user
 app.get('/baby-names', function(request, response) {
     database.babyName.findAll().then(function(data) {
@@ -60,7 +66,7 @@ app.get('/baby-names', function(request, response) {
 app.get('/baby-names/top-ten', function(request, response) {
     database.babyName.findAll({
         order: [['count', 'DESC']],
-        limit: 10
+        limit: 20
     }).then(function(data){
         response.json(data)
     })

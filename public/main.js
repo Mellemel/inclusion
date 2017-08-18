@@ -1,10 +1,13 @@
 (function () {
     // Find a <table> element with id="myTable":
     var myTable = document.getElementById("mytable")
-
+//XML is a datatype like JSON
+//new token allows you to create new Objects
+//Creates a new request
     var xmlhttp = new XMLHttpRequest();
     xmlhttp.onreadystatechange = function() {
         if(xmlhttp.readyState == XMLHttpRequest.DONE){
+            //200 means its good like 404 means its bad
             if (xmlhttp.status === 200){
                 var data = JSON.parse(xmlhttp.responseText)
                 for (var x = 0; x < data.length; x++) {
@@ -21,11 +24,13 @@
                     // Add some text to the new cells:
                     cell1.innerHTML = '' + x
                     cell2.innerHTML = '' + element.birthYear
-                    cell3.innerHTML = '' + element.enthnicity
+                    cell3.innerHTML = '' + element.ethnicity
                     cell4.innerHTML = '' + element.name
                     cell5.innerHTML = '' + element.count
                     cell6.innerHTML = '' + element.rank
                 }
+                //400 means there was an error on the client
+                //500 means error on server side
             } else if (xmlhttp.status === 400) {
                 alert('There was an http error 400!')
             } else {
