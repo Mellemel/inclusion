@@ -1,5 +1,5 @@
 var sequelize = require('sequelize')
-var sq = new sequelize('postgres://Jackssan@localhost:5432/inclusion')
+var sq = new sequelize('postgres://Jackssanchez@localhost:5432/inclusion')
 
 var userTemplate = sq.define('User', {
     email: {
