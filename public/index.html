@@ -11,29 +11,28 @@
 </head>
 
 <body>
-    <section class=form>
-            <form class="form-inline">
+    <section class=form id="authentication">
+            <form class="form-inline" onsubmit="authenticate(); return false;">
                     <div class="form-group">
                       <label for="username" class="sr-only">Email</label>
                       <input type="text" class="form-control" id="username" placeholder="user" required="true">
                     </div>
                     <div class="form-group mx-sm-3">
-                      <label for="inputPassword2" class="sr-only">Password</label>
-                      <input type="password" class="form-control" id="inputPassword2" placeholder="Password" required="true">
+                      <label for="password" class="sr-only">Password</label>
+                      <input type="password" class="form-control" id="password" placeholder="Password" required="true">
                     </div>
-                    <button type="submit" class="btn btn-primary">Confirm identity</button>
+                    <button type="submit" class="btn btn-primary"> Confirm identity</button>
             </form>
-        <!-- 
-        1)Make sure usr/pass field is completed (required field)
+        <!-- 1)Make sure usr/pass field is completed (required field)
             -if empty, notify usr
         2)Notify usr if usr/pass is incorrect
         3)Make sure you have Input Fields, labels, submit button
         4)create new unique branch and commit with -m 
         5)push branch onto repo
-        6)wireframe form -->
+        6)wireframe form  -->
 
     </section>
-    <!-- <div class="container-fluid">
+    <div class="container-fluid">
         <table id="mytable" class="table">
             <thead>
                 <tr>
@@ -45,7 +44,7 @@
                     <th>Rank</th>
                 </tr>
             </thead>
-        </table> -->
+        </table>
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

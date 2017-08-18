@@ -56,7 +56,7 @@ app.get('/baby-names', function(request, response) {
     })
 })
 
-// registering '/baby-names/top-ten'. e.g. www.google.com/user
+// registering '/baby-names/top-ten'.
 app.get('/baby-names/top-ten', function(request, response) {
     database.babyName.findAll({
         order: [['count', 'DESC']],
