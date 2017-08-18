@@ -2,9 +2,9 @@
 function authenticate(){
         var user=document.getElementById("username");
         var password=document.getElementById("password");
-        // var authenticationForm=document.getElementById("credentials");
+        var myForm=document.getElementById("credentials");
         if (user.value.toLowerCase()==='admin' && password.value==="admin") {
-            //authenticationForm.innerHTML("");
+            myForm.style.display="none";
             renderData();
         }
         else{
@@ -51,6 +51,7 @@ function renderData(){
         // Find a <table> element with id="myTable":
       
         var myTable = document.getElementById("mytable")
+        myTable.style.display="table";
         
             var xmlhttp = new XMLHttpRequest();
             xmlhttp.onreadystatechange = function() {
