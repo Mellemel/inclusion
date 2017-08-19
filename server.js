@@ -12,24 +12,30 @@ app.use(express.static('public'));
 
 // registering '/login' route to the express app. e.g. www.google.com/login
 app.post('/login', function(request, response){
+    console.log(request.body)
+    console.log(request)
     database.User.findAll({
         where: {
             email: request.body.email
         }
     }).then(function(data){
-        const user = data[0].dataValues
-        if (user.password === request.body.password) {
-            const token = jwt.sign({
-                name: user.name,
-                admin: user.admin
-            }, jwtSecret, {
-                expiresIn: 60 * 2
-            })
-            console.log(token)
-            response.setHeader('Authorization', token.toString())
-            response.json(token)
+        if (data.length > 0) {
+            const user = data[0].dataValues // []
+            if (user.password === request.body.password) {
+                const token = jwt.sign({
+                    name: user.name,
+                    admin: user.admin
+                }, jwtSecret, {
+                    expiresIn: 60 * 2
+                })
+                console.log(token)
+                response.setHeader('Authorization', token.toString())
+                response.json(token)
+            } else {
+                response.sendStatus(403)
+            }
         } else {
-            response.sendStatus(403)
+            response.sendStatus(401)
         }
     })
 })

@@ -1,20 +1,31 @@
+(function name() {
+    function authenticate() {
+        var user = document.getElementById("username");
+        var password = document.getElementById("password");
+        var myForm = document.getElementById("credentials");
+        var form = new FormData()
+        console.log(user.value, password.value)
+        form.append('email', user.value)
+        form.append('password', password.value)
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                if (xmlhttp.status === 200) { //Request successful,
+                    var data = JSON.parse(xmlhttp.responseText) //retrieve data from babynames db
+                    createTable(data, myTable)
+                } else if (xmlhttp.status === 400) {
+                    alert('There was an http error 400!')
+                } else {
+                    alert('something else other than 400 was returned!')
+                }
+            }
+        }
 
-function authenticate(){
-        var user=document.getElementById("username");
-        var password=document.getElementById("password");
-        var myForm=document.getElementById("credentials");
-        if (user.value.toLowerCase()==='admin' && password.value==="admin") {
-            myForm.style.display="none";
-            renderData();
-        }
-        else{
-            password.value="";
-            alert("username and/or password are incorrect");
-        }
-        return false;
-        
+        xmlhttp.open('POST', '/login', true);
+        xmlhttp.send(form);
     }
-
+    var button = document.getElementById('submit-button');
+    button.addEventListener('click', authenticate)
     // With Jquery
     // $.ajax({
     //     url: "/baby-names/top-ten",
@@ -24,52 +35,51 @@ function authenticate(){
     //     }
     // });
 
-function createTable(data,myTable){
-    for (var x = 0; x < data.length; x++) {
-        var element = data[x];
-        // Create an empty <tr> element and add it to the 1st position of the table:
-        var row = myTable.insertRow(x+1)
-        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-        var cell1 = row.insertCell(0)
-        var cell2 = row.insertCell(1)
-        var cell3 = row.insertCell(2)
-        var cell4 = row.insertCell(3)
-        var cell5 = row.insertCell(4)
-        var cell6 = row.insertCell(5)
-        // Add some text to the new cells:
-        cell1.innerHTML = '' + x
-        cell2.innerHTML = '' + element.birthYear
-        cell3.innerHTML = '' + element.ethnicity
-        cell4.innerHTML = '' + element.name
-        cell5.innerHTML = '' + element.count
-        cell6.innerHTML = '' + element.rank
+    function createTable(data, myTable) {
+        for (var x = 0; x < data.length; x++) {
+            var element = data[x];
+            // Create an empty <tr> element and add it to the 1st position of the table:
+            var row = myTable.insertRow(x + 1)
+            // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+            var cell1 = row.insertCell(0)
+            var cell2 = row.insertCell(1)
+            var cell3 = row.insertCell(2)
+            var cell4 = row.insertCell(3)
+            var cell5 = row.insertCell(4)
+            var cell6 = row.insertCell(5)
+            // Add some text to the new cells:
+            cell1.innerHTML = '' + x
+            cell2.innerHTML = '' + element.birthYear
+            cell3.innerHTML = '' + element.ethnicity
+            cell4.innerHTML = '' + element.name
+            cell5.innerHTML = '' + element.count
+            cell6.innerHTML = '' + element.rank
+        }
+
     }
-    
-}
 
 
-function renderData(){
+    function renderData() {
         // Find a <table> element with id="myTable":
-      
+
         var myTable = document.getElementById("mytable")
-        myTable.style.display="table";
-        
-            var xmlhttp = new XMLHttpRequest();
-            xmlhttp.onreadystatechange = function() {
-                if(xmlhttp.readyState == XMLHttpRequest.DONE){
-                    if (xmlhttp.status === 200){ //Request successful,
-                        var data = JSON.parse(xmlhttp.responseText) //retrieve data from babynames db
-                        createTable(data,myTable)
-        
-                    } else if (xmlhttp.status === 400) {
-                        alert('There was an http error 400!')
-                    } else {
-                        alert('something else other than 400 was returned!')
-                    }
+        myTable.style.display = "table";
+
+        var xmlhttp = new XMLHttpRequest();
+        xmlhttp.onreadystatechange = function () {
+            if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                if (xmlhttp.status === 200) { //Request successful,
+                    var data = JSON.parse(xmlhttp.responseText) //retrieve data from babynames db
+                    createTable(data, myTable)
+                } else if (xmlhttp.status === 400) {
+                    alert('There was an http error 400!')
+                } else {
+                    alert('something else other than 400 was returned!')
                 }
             }
-        
-            xmlhttp.open('GET', '/baby-names/top-ten', true);
-            xmlhttp.send();
         }
-    
+
+        xmlhttp.open('GET', '/baby-names/top-ten', true);
+        xmlhttp.send();
+    }
+})();
